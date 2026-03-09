@@ -19,7 +19,8 @@ def main():
         cols={h:[] for h in reader.fieldnames if h!='measurement'}
         for row in reader:
             for h in cols:
-                cols[h].append(float(row[h]))
+                v=row.get(h,'').strip()
+                if v: cols[h].append(float(v))
     t={k:np.array(v) for k,v in cols.items()}
     bl_name='valid'
     baseline=t[bl_name]
